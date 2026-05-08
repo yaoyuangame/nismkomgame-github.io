@@ -2,127 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GuanXing - Information Services, Games & Software Development</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRISAHA Studio | Casual Game Experts</title>
     <style>
+        /* Modern CSS Reset */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0f0f12;
             margin: 0;
             padding: 0;
-            background: #f9f9f9;
-            color: #333;
         }
 
-        header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        section {
-            padding: 20px;
+        .container {
             max-width: 900px;
-            margin: auto;
-            background: #fff;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        h1, h2 {
-            color: #2c3e50;
+        /* Header & Logo */
+        header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #00d4ff;
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+        }
+
+        /* Game List */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .game-card {
+            background: #1a1a1f;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: #00d4ff;
+        }
+
+        .game-card h3 {
+            margin-top: 0;
+            color: #00d4ff;
+        }
+
+        /* Contact Info */
+        .contact-box {
+            background: linear-gradient(135deg, #1e1e26 0%, #111115 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .email-link {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
         }
 
         footer {
             text-align: center;
-            padding: 15px;
-            background: #2c3e50;
-            color: #fff;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        ul {
-            margin-left: 20px;
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            section { padding: 40px 0; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>GuanXing</h1>
-        <p>Information Services · Games · Software Development</p>
-    </header>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>PRISAHA Studio</h1>
+            <div class="subtitle">Crafting Moments of Joy Through Casual Games</div>
+        </header>
 
-    <section>
-        <h2>About Us</h2>
-        <p>
-            GuanXing is a technology company specializing in information services, game development, and software solutions.
-            With a focus on reliability, efficiency, and user experience, we deliver end-to-end digital solutions for both enterprises and individuals.
-        </p>
-    </section>
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Us</h2>
+            <p>
+                Welcome to <strong>PRISAHA Studio</strong>. We are a passionate team of developers and designers dedicated to creating high-quality casual games. Our mission is simple: to build engaging, accessible, and fun experiences that players can enjoy anytime, anywhere.
+            </p>
+            <p>
+                Whether it's a puzzle, a card game, or an interactive adventure, we focus on smooth performance, beautiful aesthetics, and addictive gameplay.
+            </p>
+        </section>
 
-    <section>
-        <h2>Mission & Vision</h2>
-        <p><strong>Mission:</strong> Enhance product value and user experience with technology and creativity.</p>
-        <p><strong>Vision:</strong> Become a trusted long-term partner in technology and content development.</p>
-    </section>
+        <!-- Games Section -->
+        <section id="games">
+            <h2>Our Focus</h2>
+            <div class="game-grid">
+                <div class="game-card">
+                    <h3>Puzzle & Logic</h3>
+                    <p>Challenging the mind with innovative mechanics and satisfying solutions.</p>
+                </div>
+                <div class="game-card">
+                    <h3>Board & Classic</h3>
+                    <p>Bringing traditional games into the digital age with modern flair (like our Mahjong series).</p>
+                </div>
+                <div class="game-card">
+                    <h3>Instant Fun</h3>
+                    <p>Hyper-casual experiences designed for quick sessions and maximum engagement.</p>
+                </div>
+            </div>
+        </section>
 
-    <section>
-        <h2>Core Services</h2>
-        <ul>
-            <li><strong>Information Services</strong> – System planning, data visualization, API integration, cloud operations.</li>
-            <li><strong>Game Development</strong> – Casual and mid-core games, Unity cross-platform builds, backend & analytics, monetization solutions.</li>
-            <li><strong>Software Development</strong> – Enterprise apps, mobile apps, desktop tools, plugins & SDKs.</li>
-        </ul>
-    </section>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>Interested in collaborating or have a question about our games? We'd love to hear from you.</p>
+            <div class="contact-box">
+                <p>Official Email:</p>
+                <a href="mailto:rusdiyanto.cr@gmail.com" class="email-link">rusdiyanto.cr@gmail.com</a>
+            </div>
+        </section>
 
-    <section>
-        <h2>Solutions</h2>
-        <ul>
-            <li>Digital transformation: From planning to implementation</li>
-            <li>Cross-platform content publishing</li>
-            <li>Data-driven growth: analytics, A/B testing</li>
-            <li>Security & compliance support</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Technical Expertise</h2>
-        <ul>
-            <li>Engines & Frameworks: Unity, .NET, Node.js, Python</li>
-            <li>Client: iOS, Android, WebGL, PC</li>
-            <li>Server: Kubernetes, Cloud platforms, SQL & NoSQL databases</li>
-            <li>Engineering: CI/CD, automated testing, monitoring, gray release</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Engagement Models</h2>
-        <ul>
-            <li>Custom Development – milestone-based, transparent progress</li>
-            <li>Co-Creation – deep collaboration with your team</li>
-            <li>Continuous Support – updates, optimization, security</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Why Choose Us</h2>
-        <ul>
-            <li>Reusable components for faster delivery</li>
-            <li>Balance of data and user experience</li>
-            <li>Well-documented code for long-term maintenance</li>
-            <li>Dedicated communication and agile response</li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Contact Us</h2>
-        <p>Email: <a href="mailto:qinxulun0505@gmail.com">qinxulun0505@gmail.com</a></p>
-    </section>
-
-    <footer>
-        <p>© 2025 GuanXing. All rights reserved.</p>
-    </footer>
+        <!-- Footer Section -->
+        <footer>
+            &copy; 2024 PRISAHA Studio. All Rights Reserved.
+        </footer>
+    </div>
 
 </body>
 </html>
