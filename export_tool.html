@@ -316,7 +316,7 @@ const TOKEN       = "78c3035b64f4c7ae87b68e397fc4f1aa";
 })();
 
 // ============================================================
-// 4. 导出逻辑
+// 4. 工具函数
 // ============================================================
 function setStatus(msg, type) {
   var el = document.getElementById("statusArea");
@@ -336,6 +336,16 @@ function datetimeToUnix(dtStr) {
   return Math.floor(new Date(dtStr).getTime() / 1000);
 }
 
+function formatBytes(n) {
+  if (n < 1024) return n + " B";
+  if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
+  if (n < 1073741824) return (n / 1048576).toFixed(1) + " MB";
+  return (n / 1073741824).toFixed(2) + " GB";
+}
+
+// ============================================================
+// 5. 导出逻辑
+// ============================================================
 async function handleExport() {
   var btn = document.getElementById("exportBtn");
   var pkg = document.getElementById("packageName").value;
@@ -356,10 +366,12 @@ async function handleExport() {
     return;
   }
 
-  // 构造 URL
+  // 构造 URL：token / device_id 走 query 参数，让浏览器原生下载（无法设置自定义头）
   var url = API_BASE + "?package_name=" + encodeURIComponent(pkg)
           + "&start_time=" + startTs
-          + "&end_time=" + endTs;
+          + "&end_time=" + endTs
+          + "&token=" + encodeURIComponent(TOKEN)
+          + "&device_id=" + encodeURIComponent(DEVICE_ID);
 
   // 显示调试信息
   setDebug(
@@ -371,76 +383,22 @@ async function handleExport() {
     + "本地时间: " + startStr + " ~ " + endStr
   );
 
-  // 禁用按钮
-  btn.disabled = true;
-  btn.textContent = "导出中…";
-  setStatus('<span class="spinner"></span>正在请求服务器，请稍候…', "loading");
-
-  try {
-    var resp = await fetch(url, {
-      method: "GET",
-      headers: {
-        "token": TOKEN,
-        "device_id": DEVICE_ID,
-        "Content-Type": "application/json"
-      }
-    });
-
-    var text = await resp.text();
-
-    // 检查是否为 JSON 错误消息
-    var trimmed = text.trim();
-    if (trimmed.startsWith("{")) {
-      try {
-        var errObj = JSON.parse(trimmed);
-        setStatus("服务器返回错误：<br/>" + (errObj.message || errObj.msg || JSON.stringify(errObj)), "error");
-        return;
-      } catch (e) {
-        // 不是合法 JSON，继续当作正常 CSV
-      }
-    }
-
-    if (!resp.ok) {
-      setStatus("请求失败，HTTP " + resp.status + "：" + (text.slice(0, 200)), "error");
-      return;
-    }
-
-    // 生成文件名
-    var now = new Date();
-    function pad(n) { return String(n).padStart(2, "0"); }
-    var fileName = "events_"
-      + now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + "_"
-      + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds())
-      + ".csv";
-
-    // 触发浏览器下载（弹"另存为"对话框）
-    var blob = new Blob([text], { type: "text/csv;charset=utf-8" });
-    var a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = fileName;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-
-    // 统计行数
-    var lineCount = text.trim().split("\n").length;
-
-    setStatus(
-      "✅ 导出成功！<br/>"
-      + "📄 文件：" + fileName + "<br/>"
-      + "📊 数据行数：<strong>" + lineCount + "</strong> 行（含表头）<br/>"
-      + "🕐 时间范围：<code>" + startStr + "</code> ~ <code>" + endStr + "</code><br/>"
-      + "💾 浏览器已弹出「另存为」对话框，请选择保存位置。",
-      "success"
-    );
-
-  } catch (err) {
-    setStatus("❌ 网络错误：" + err.message + "<br/>请检查网络连接或联系开发。", "error");
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "导出数据";
+  // 通过隐藏 iframe 发起原生下载：浏览器接管，实时进入下载列表、边下边写盘、几乎不占内存
+  var iframe = document.getElementById("dlFrame");
+  if (!iframe) {
+    iframe = document.createElement("iframe");
+    iframe.id = "dlFrame";
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
   }
+  iframe.src = url;
+
+  setStatus(
+    "✅ 已发起下载，浏览器会在「下载列表」中实时显示进度（边下边写盘）。<br/>"
+    + "🕐 时间范围：<code>" + startStr + "</code> ~ <code>" + endStr + "</code><br/>"
+    + "若下载列表没有出现：请确认时间范围内有数据、跨度未超 1 个月，或点上方「显示请求详情」把 URL 发给开发排查。",
+    "success"
+  );
 }
 </script>
 
