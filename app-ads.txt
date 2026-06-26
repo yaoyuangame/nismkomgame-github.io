@@ -369,6 +369,7 @@ rubiconproject.com, 27714, RESELLER, 0bfd66d529a55807
 orbrx.ai, 8000869124, RESELLER
 #Vungle---------------
 vungle.com,6a03006506e5392039efa0a8,DIRECT,c107d686becd2d77
+vungle.com, 67eca5e9c4ce70001125a2fb, DIRECT, c107d686becd2d77
 33across.com,001Pg0000197KcKIAU,RESELLER,bbea06d9c4d2853c
 contextweb.com,562852,RESELLER,89ff185a4c4e857c
 media.net,8CU12AQ1Y,RESELLER
