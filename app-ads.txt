@@ -3,6 +3,7 @@ google.com, pub-9949622093085866, DIRECT, f08c47fec0942fa0
 google.com, pub-2368191291532374, DIRECT, f08c47fec0942fa0
 ＃Meta
 facebook.com, 825372703542227, DIRECT, c3e20eee3f780d68
+facebook.com, 674935621241336, DIRECT, c3e20eee3f780d68
 # Applovin--------
 applovin.com, 5bfb2c0b22ddeae552cf48ec32655913, DIRECT
 adyoulike.com, 2d578cf695c89ec2ba707280319d2020, RESELLER
